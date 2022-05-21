@@ -2,7 +2,7 @@
 
 For the Python Analysis Project I chose NYC Restaurants Health Ispection Open Data Source provided by NYC Open Data.
 
-After i reviewed the data set, done overview I cleaned it and defined some basic **possible user requirements**: 
+After i reviewed the data set, finished basic overview I cleaned it and defined some basic **possible user requirements**: 
 
 - Establish a trend of average scores of restaurants, group by borough and year of inspection
 - Based on the average trend, choose a borough with the best health score trend
@@ -68,7 +68,7 @@ The tools that were used for the data analysis project are:
 
 ### CSV Import, Setting up database connection and schema creation
 
-In order to easier manipulate with data set that has more then 300k records I decided to use MySQL Workbench and import data from CSV db format. 
+In order to easier manipulate with data set that has more then 300k records I decided to use MySQL Workbench and import data from CSV to db format. 
 
 Here are some steps:
 
@@ -79,5 +79,56 @@ LOAD DATA INFILE '/var/lib/mysql/DOHMH_New_York_City_Restaurant_Inspection_Resul
 INTO TABLE `DOHMH_New_York_City_Restaurant_Inspection_Results`
 FIELDS TERMINATED BY ',' OPTIONALLY ENCLOSED BY '"'
 IGNORE 1 ROWS;
+```
+3. I did some data cleanup and created a view **clean_data** that i will use later on in Python Notebook to create dataframes. I did data cleanup and view creation by running following command: 
+
+```
+CREATE ALGORITHM = UNDEFINED DEFINER = `root` @`%` SQL SECURITY DEFINER VIEW `clean_data` AS 
+select 
+  `DOHMH_New_York_City_Restaurant_Inspection_Results`.`CAMIS` AS `CAMIS`, 
+  `DOHMH_New_York_City_Restaurant_Inspection_Results`.`DBA` AS `DBA`, 
+  `DOHMH_New_York_City_Restaurant_Inspection_Results`.`BORO` AS `BORO`, 
+  `DOHMH_New_York_City_Restaurant_Inspection_Results`.`BUILDING` AS `BUILDING`, 
+  `DOHMH_New_York_City_Restaurant_Inspection_Results`.`STREET` AS `STREET`, 
+  `DOHMH_New_York_City_Restaurant_Inspection_Results`.`ZIPCODE` AS `ZIPCODE`, 
+  `DOHMH_New_York_City_Restaurant_Inspection_Results`.`PHONE` AS `PHONE`, 
+  `DOHMH_New_York_City_Restaurant_Inspection_Results`.`CUISINE DESCRIPTION` AS `CUISINE_DESCRIPTION`, 
+  str_to_date(
+    `DOHMH_New_York_City_Restaurant_Inspection_Results`.`INSPECTION DATE`, 
+    '%m/%d/%Y'
+  ) AS `INSPECTION_DATE`, 
+  `DOHMH_New_York_City_Restaurant_Inspection_Results`.`ACTION` AS `ACTION`, 
+  `DOHMH_New_York_City_Restaurant_Inspection_Results`.`VIOLATION CODE` AS `VIOLATION_CODE`, 
+  `DOHMH_New_York_City_Restaurant_Inspection_Results`.`VIOLATION DESCRIPTION` AS `VIOLATION_DESCRIPTION`, 
+  `DOHMH_New_York_City_Restaurant_Inspection_Results`.`CRITICAL FLAG` AS `CRITICAL_FLAG`, 
+  `DOHMH_New_York_City_Restaurant_Inspection_Results`.`SCORE` AS `SCORE`, 
+  100 - `DOHMH_New_York_City_Restaurant_Inspection_Results`.`SCORE` AS `WEIGHED_SCORE`, 
+  `DOHMH_New_York_City_Restaurant_Inspection_Results`.`GRADE` AS `GRADE`, 
+  str_to_date(
+    `DOHMH_New_York_City_Restaurant_Inspection_Results`.`GRADE DATE`, 
+    '%m/%d/%Y'
+  ) AS `GRADE_DATE`, 
+  str_to_date(
+    `DOHMH_New_York_City_Restaurant_Inspection_Results`.`RECORD DATE`, 
+    '%m/%d/%Y'
+  ) AS `RECORD_DATE`, 
+  `DOHMH_New_York_City_Restaurant_Inspection_Results`.`INSPECTION TYPE` AS `INSPECTION_TYPE`, 
+  `DOHMH_New_York_City_Restaurant_Inspection_Results`.`Latitude` AS `Latitude`, 
+  `DOHMH_New_York_City_Restaurant_Inspection_Results`.`Longitude` AS `Longitude`, 
+  `DOHMH_New_York_City_Restaurant_Inspection_Results`.`Community Board` AS `Community_Board`, 
+  `DOHMH_New_York_City_Restaurant_Inspection_Results`.`Council District` AS `Council_District`, 
+  `DOHMH_New_York_City_Restaurant_Inspection_Results`.`Census Tract` AS `Census_Tract`, 
+  `DOHMH_New_York_City_Restaurant_Inspection_Results`.`BIN` AS `BIN`, 
+  `DOHMH_New_York_City_Restaurant_Inspection_Results`.`BBL` AS `BBL`, 
+  `DOHMH_New_York_City_Restaurant_Inspection_Results`.`NTA` AS `NTA` 
+from 
+  `DOHMH_New_York_City_Restaurant_Inspection_Results` 
+where 
+  `DOHMH_New_York_City_Restaurant_Inspection_Results`.`BORO` <> '0' 
+  and str_to_date(
+    `DOHMH_New_York_City_Restaurant_Inspection_Results`.`GRADE DATE`, 
+    '%m/%d/%Y'
+  ) > cast('2018-01-01' as date);
+
 ```
 
