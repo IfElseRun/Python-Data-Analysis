@@ -131,4 +131,13 @@ where
   ) > cast('2018-01-01' as date);
 
 ```
+3. To connect to the database I used MYSQLdb interface for connecting to a MySQL database server from Python. I installed mysqlclient using conda and established connection by simply defining: 
+```
+con = MySQLdb.connect(host='mariadb2.mostardesigns.com', 
+                      port=3306, 
+                      user='username',
+                      database='nyc_restaurants',
+                      passwd='your_password')
+```
 
+Note: For the [business-case-data-analysis.ipynb](https://github.com/IfElseRun/Python-Data-Analysis/blob/main/business-case-data-analysis.ipynb) I used views to do a better code refactoring and because of the performance. 
