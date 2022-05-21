@@ -2,14 +2,17 @@
 
 For the Python Analysis Project I chose NYC Restaurants Health Ispection Open Data Source provided by NYC Open Data.
 
-After i reviewed the data set and cleaned it I defined some basic possible user requirements: 
+After i reviewed the data set, done overview I cleaned it and defined some basic **possible user requirements**: 
 
 - Establish a trend of average scores of restaurants, group by borough and year of inspection
 - Based on the average trend, choose a borough with the best health score trend
 - Establish a trend of average score per cuisine type in the selected borough,group by year, with the    best health score,rank by their overall average health score descending limited to top 5 
 - Based on the average trend, choose a cuisine from the previously selected borough with the best health score trend
 - Establish a trend of average scores per restaurant in the previously selected cuisine type and borough, rank by their overall average rank score descending limited to top 5
-- Based on the previously mentioned average trend in the borough, choose a restaurant with the best health score trend that had the inspection in the current year
+- Based on the previously mentioned average trend in the borough, choose a restaurant with the best health score trend that had the inspection in the current year and show its average score over years
+
+The result of the previously listed requirements can be found in the following notebook
+[business-case-data-analysis.ipynb](https://github.com/IfElseRun/Python-Data-Analysis/blob/main/business-case-data-analysis.ipynb)
 
 
 
@@ -29,14 +32,15 @@ The tools that were used for the data analysis project are:
 -- MySQL Workbench Database Managamenet Software for schema cration, MySQL execution and raw data manipulation
 -- Jupyter Notebook using Anaconda for Python execution and data visualization
 
-## Data Set 
+### Data Set 
 
-The dataset contains every sustained or not yet adjudicated violation citation from every full or special program inspection conducted up to three years prior to the most recent inspection for restaurants and college cafeterias in an active status on the RECORD DATE (date of the data pull)
+[NYC OPEN DATA -  Data Set Source](https://data.cityofnewyork.us/Health/DOHMH-New-York-City-Restaurant-Inspection-Results/43nn-pn8j)
 
-### Data Set Source
+The dataset contains every sustained or not yet adjudicated violation citation from every full or special program inspection conducted up to three years prior to the most recent inspection for restaurants in an active status on the RECORD DATE (date of the data pull). Establishments are uniquely identified by their CAMIS (record ID) number.Thousands of restaurants start business and go out of business every year, only restaurants in an active status are included in the dataset. 
 
-[NYC OPEN DATA](https://data.cityofnewyork.us/Health/DOHMH-New-York-City-Restaurant-Inspection-Results/43nn-pn8j)
+Establishments with inspection date of 1/1/1900 are new establishments that have not yet received an inspection. I excluded these from the data set that was used for the individual business case data analysis. Restaurants that received no violations are represented by a single row and coded as having no violations using the ACTION field. 
 
+All of the basic fields are explained in the table below: 
 
  **Column Name**       	| **Column Description**                                                          	|
 |-----------------------	|---------------------------------------------------------------------------------	|
