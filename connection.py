@@ -4,6 +4,7 @@ import MySQLdb
 import sys
 
 #Connecting to a MySQL database
+#Connection credentials used will work only if you are connected over VPN. Create your setup and replace values for connection,
 
 class MySQLConnection:
     con = MySQLdb.connect(host='mariadb2.mostardesigns.com', 
