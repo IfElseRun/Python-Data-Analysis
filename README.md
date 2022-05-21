@@ -26,15 +26,9 @@ In order to operate every restaurant is graded and has to pass special program i
 
 The motivation of this research is to analyze NYC inspection data, better understand overall restaurants health and analyze one of the potential user journeys. 
 
-## Tools & Methods
+## About Data Set 
 
-The tools that were used for the data analysis project are: 
--- MySQL Workbench Database Managamenet Software for schema cration, MySQL execution and raw data manipulation
--- Jupyter Notebook using Anaconda for Python execution and data visualization
-
-### Data Set 
-
-[NYC OPEN DATA -  Data Set Source](https://data.cityofnewyork.us/Health/DOHMH-New-York-City-Restaurant-Inspection-Results/43nn-pn8j)
+The data set was exported in its original size of 301194 records in .csv format from the [NYC OPEN DATA -  Data Set Source](https://data.cityofnewyork.us/Health/DOHMH-New-York-City-Restaurant-Inspection-Results/43nn-pn8j)
 
 The dataset contains every sustained or not yet adjudicated violation citation from every full or special program inspection conducted up to three years prior to the most recent inspection for restaurants in an active status on the RECORD DATE (date of the data pull). Establishments are uniquely identified by their CAMIS (record ID) number.Thousands of restaurants start business and go out of business every year, only restaurants in an active status are included in the dataset. 
 
@@ -63,3 +57,27 @@ All of the basic fields are explained in the table below:
 | GRADE DATE            	| Date when grade was issued to the establishment (restaurant)                    	|
 | RECORD DATE           	| Date record was added to dataset                                                	|
 | INSPECTION TYPE       	| A combination of the inspection program and the type of inspection performed    	|
+
+
+## Tools & Methods
+
+The tools that were used for the data analysis project are: 
+
+- MySQL Workbench Database Managamenet Software for schema cration, MySQL execution and raw data manipulation
+- Jupyter Notebook using Anaconda for Python execution and data visualization
+
+### CSV Import, Setting up database connection and schema creation
+
+In order to easier manipulate with data set that has more then 300k records I decided to use MySQL Workbench and import data from CSV db format. 
+
+Here are some steps:
+
+1. I creted a following schema **nyc_restaurants** with **DOHMH_New_York_City_Restaurant_Inspection_Results** table
+2. I decided to not import data using Table Data Import Wizard as it would take a lot of time. Instead I load the data from csv to db format using following command: 
+```
+LOAD DATA INFILE '/var/lib/mysql/DOHMH_New_York_City_Restaurant_Inspection_Results.csv'
+INTO TABLE `DOHMH_New_York_City_Restaurant_Inspection_Results`
+FIELDS TERMINATED BY ',' OPTIONALLY ENCLOSED BY '"'
+IGNORE 1 ROWS;
+```
+
