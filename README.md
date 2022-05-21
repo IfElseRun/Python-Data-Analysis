@@ -1,5 +1,17 @@
 # NYC Restaurant Inspection Data Analysis
 
+For the Python Analysis Project I chose NYC Restaurants Health Ispection Open Data Source provided by NYC Open Data.
+
+After i reviewed the data set and cleaned it I defined some basic possible user requirements: 
+
+- Establish a trend of average scores of restaurants, group by borough and year of inspection
+- Based on the average trend, choose a borough with the best health score trend
+- Establish a trend of average score per cuisine type in the selected borough,group by year, with the    best health score,rank by their overall average health score descending limited to top 5 
+- Based on the average trend, choose a cuisine from the previously selected borough with the best health score trend
+- Establish a trend of average scores per restaurant in the previously selected cuisine type and borough, rank by their overall average rank score descending limited to top 5
+- Based on the previously mentioned average trend in the borough, choose a restaurant with the best health score trend that had the inspection in the current year
+
+
 
 ## Problem Statement, Motivation and Purpose
 
