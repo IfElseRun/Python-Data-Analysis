@@ -73,7 +73,7 @@ In order to easier manipulate with data set that has more then 300k records I de
 Here are some steps:
 
 1. I creted a following schema **nyc_restaurants** with **DOHMH_New_York_City_Restaurant_Inspection_Results** table
-2. I decided to not import data using Table Data Import Wizard as it would take a lot of time. Instead I load the data from csv to db format using following command: 
+2. I decided to not import data using Table Data Import Wizard as it would take a lot of time. Instead I loaded the data from csv to db format using following command: 
 ```
 LOAD DATA INFILE '/var/lib/mysql/DOHMH_New_York_City_Restaurant_Inspection_Results.csv'
 INTO TABLE `DOHMH_New_York_City_Restaurant_Inspection_Results`
@@ -139,5 +139,6 @@ con = MySQLdb.connect(host='mariadb2.mostardesigns.com',
                       database='nyc_restaurants',
                       passwd='your_password')
 ```
+I created module as [connection.py](https://github.com/IfElseRun/Python-Data-Analysis/blob/main/connection.py) file and included it in the Notebook files I used to demonstrate how configurational settings could be transformed into module. 
 
-Note: For the [business-case-data-analysis.ipynb](https://github.com/IfElseRun/Python-Data-Analysis/blob/main/business-case-data-analysis.ipynb) I used views to do a better code refactoring and because of the performance. 
+** Note: For the [business-case-data-analysis.ipynb](https://github.com/IfElseRun/Python-Data-Analysis/blob/main/business-case-data-analysis.ipynb) I used views to do a better code refactoring and because of the performance. **
