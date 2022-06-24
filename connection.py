@@ -7,11 +7,11 @@ import sys
 #Connection credentials used will work only if you are connected over VPN. Create your setup and replace values for connection,
 
 class MySQLConnection:
-    con = MySQLdb.connect(host='mariadb2.mostardesigns.com', 
+    con = MySQLdb.connect(host='', 
                           port=3306, 
                           user='root',
                           database='nyc_restaurants',
-                          passwd='fl!ntst0n3')
+                          passwd='')
     c = con.cursor()
     
     # Get the count
